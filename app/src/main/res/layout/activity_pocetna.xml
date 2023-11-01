@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".pocetnaActivity"
+    android:background="@drawable/vozac_pozadina">
+
+    <Button
+        android:id="@+id/forwardBtn"
+        android:layout_width="48dp"
+        android:layout_height="98dp"
+        android:text="."
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginStart="50dp"
+        android:layout_marginBottom="20dp"
+        android:background=""/>
+
+    <Button
+        android:id="@+id/rightBtn"
+        android:layout_width="66dp"
+        android:layout_height="76dp"
+        android:text="."
+        android:textColor="@color/gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="170dp"
+        android:layout_marginEnd="90dp"
+        android:background=""/>
+
+    <Button
+        android:id="@+id/leftBtn"
+        android:layout_width="66dp"
+        android:layout_height="76dp"
+        android:text="."
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="170dp"
+        android:layout_marginStart="10dp"
+        android:background=""/>
+
+    <Button
+        android:id="@+id/reverseBtn"
+        android:layout_width="48dp"
+        android:layout_height="78dp"
+        android:text="."
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="90dp"
+        android:layout_marginBottom="20dp"
+        android:background=""/>
+
+    <Button
+        android:id="@+id/stopBtn"
+        android:layout_width="128dp"
+        android:layout_height="70dp"
+        android:text="."
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginBottom="20dp"
+        android:background=""
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>
