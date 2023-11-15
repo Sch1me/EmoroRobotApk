@@ -48,6 +48,7 @@ class pocetnaActivity : AppCompatActivity() {
         binding.upRightBtn.setOnClickListener { sendCommand("UR") }
         binding.downLeftBtn.setOnClickListener { sendCommand("DL") }
         binding.downRightBtn.setOnClickListener { sendCommand("DR") }
+        binding.stopBtn.setOnClickListener { sendCommand("") }
         binding.disconectBtn.setOnClickListener {  disconnect() }
 
     }
