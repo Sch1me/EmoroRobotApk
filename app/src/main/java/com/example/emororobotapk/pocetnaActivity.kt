@@ -28,8 +28,6 @@ class pocetnaActivity : AppCompatActivity() {
         lateinit var m_address: String
     }
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityPocetnaBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
@@ -39,8 +37,17 @@ class pocetnaActivity : AppCompatActivity() {
 
         ConnectToDevice(this).execute()
 
+//kontrole za autic, jos prilagodit po arduino kodu
       //  binding.controlLedOn.setOnClickListener {  sendCommand("") }
       // binding.controlLedOff.setOnClickListener {  sendCommand("") }
+        binding.forwardBtn.setOnClickListener { sendCommand("F") }
+        binding.reverseBtn.setOnClickListener { sendCommand("B") }
+        binding.rightBtn.setOnClickListener { sendCommand("R") }
+        binding.leftBtn.setOnClickListener { sendCommand("L") }
+        binding.upLeftBtn.setOnClickListener { sendCommand("UL") }
+        binding.upRightBtn.setOnClickListener { sendCommand("UR") }
+        binding.downLeftBtn.setOnClickListener { sendCommand("DL") }
+        binding.downRightBtn.setOnClickListener { sendCommand("DR") }
         binding.disconectBtn.setOnClickListener {  disconnect() }
 
     }
@@ -72,7 +79,6 @@ class pocetnaActivity : AppCompatActivity() {
         init {
             this.context = c
         }
-
 
         override fun onPreExecute() {
             super.onPreExecute()

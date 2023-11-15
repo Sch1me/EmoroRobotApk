@@ -103,4 +103,60 @@
         android:layout_margin="25dp"
         />
 
+    <Button
+        android:id="@+id/upLeftBtn"
+        android:layout_width="66dp"
+        android:layout_height="76dp"
+        android:text="."
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="30dp"
+        android:layout_marginStart="50dp"
+        android:background="@color/transparent1"
+        />
+    <Button
+        android:id="@+id/upRightBtn"
+        android:layout_width="66dp"
+        android:layout_height="76dp"
+        android:text="."
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginBottom="30dp"
+        android:layout_marginEnd="130dp"
+        android:background="@color/transparent1"
+        />
+
+    <Button
+        android:id="@+id/downRightBtn"
+        android:layout_width="66dp"
+        android:layout_height="76dp"
+        android:text="."
+        android:textColor="@color/black"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="350dp"
+        android:layout_marginEnd="130dp"
+        android:background="@color/transparent1"
+        />
+
+    <Button
+        android:id="@+id/downLeftBtn"
+        android:layout_width="66dp"
+        android:layout_height="76dp"
+        android:text="."
+        android:textColor="@color/black"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="350dp"
+        android:layout_marginStart="50dp"
+        android:background="@color/transparent1"
+        />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -12,10 +12,10 @@ import android.util.Log
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.constraintlayout.helper.widget.Carousel.Adapter
+
 import androidx.core.app.ActivityCompat
 import com.example.emororobotapk.databinding.ActivityMainBinding
-import kotlinx.coroutines.selects.select
+
 
 class MainActivity : AppCompatActivity() {
     private var  m_BluetoothAdapter: BluetoothAdapter? = null
