@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Emoro Robot Apk</string>
+    <string name="refreshBtnText">REFRESH</string>
+    <string name="on">ON</string>
+    <string name="disconnect">DISCONNECT</string>
+    <string name="off">OFF</string>
 </resources>

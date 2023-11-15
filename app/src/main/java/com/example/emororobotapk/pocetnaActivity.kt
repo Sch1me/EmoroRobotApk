@@ -1,66 +1,111 @@
 package com.example.emororobotapk
 
+
+import android.Manifest
+import android.app.ProgressDialog
 import android.bluetooth.BluetoothAdapter
-import android.bluetooth.BluetoothAdapter.ACTION_REQUEST_ENABLE
-import android.bluetooth.BluetoothAdapter.ACTION_STATE_CHANGED
-import android.bluetooth.BluetoothManager
-import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.bluetooth.BluetoothDevice
+import android.bluetooth.BluetoothSocket
+import android.content.Context
+import android.content.pm.PackageManager
+import android.os.AsyncTask
 import android.os.Bundle
+import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import com.example.emororobotapk.databinding.ActivityPocetnaBinding
+import java.io.IOException
+import java.util.UUID
 
 class pocetnaActivity : AppCompatActivity() {
     lateinit var binding: ActivityPocetnaBinding
+    companion object{
+        var m_myUUID: UUID = UUID.fromString("00001101-0000-1000-8000-00805F9B34FB")
+        var m_bluetoothSocket: BluetoothSocket? = null
+        lateinit var m_progress: ProgressDialog
+        lateinit var m_bluetoothAdapter: BluetoothAdapter
+        var m_isConnected: Boolean = false
+        lateinit var m_address: String
+    }
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         binding = ActivityPocetnaBinding.inflate(layoutInflater)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
 
-//bluetooth
-        val bluetoothManager: BluetoothManager = getSystemService(BluetoothManager::class.java)
-        val bluetoothAdapter: BluetoothAdapter? = bluetoothManager.getAdapter()
-        if (bluetoothAdapter == null) {
-            // Device doesn't support Bluetooth
+        m_address = intent.getStringExtra(MainActivity.EXTRA_ADRESS).toString()
+
+        ConnectToDevice(this).execute()
+
+      //  binding.controlLedOn.setOnClickListener {  sendCommand("") }
+      // binding.controlLedOff.setOnClickListener {  sendCommand("") }
+        binding.disconectBtn.setOnClickListener {  disconnect() }
+
+    }
+
+    private fun sendCommand(input: String){
+        if(m_bluetoothSocket != null){
+            try {
+                m_bluetoothSocket!!.outputStream.write(input.toByteArray())
+            }catch (e: IOException){
+                e.printStackTrace()
+            }
         }
-        if (bluetoothAdapter?.isEnabled == false) {
-            val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
-           // startActivityForResult(enableBtIntent,)
+    }
+    private fun disconnect(){
+        if(m_bluetoothSocket != null){
+            try {
+                m_bluetoothSocket!!.close()
+                m_bluetoothSocket = null
+                m_isConnected = false
+            }catch (e: IOException){
+                e.printStackTrace()
+            }
         }
-//nakon sto se spojio na bluetooth
-
-        val stoji : Boolean
-        stoji = false
-
-        binding.forwardBtn.setOnClickListener {
-
-            //Auto go napred
-
-        }
-        binding.reverseBtn.setOnClickListener {
-
-            //auto go nazad
-
-        }
-        binding.stopBtn.setOnClickListener {
-
-            //auto stop
-
-        }
-        binding.leftBtn.setOnClickListener {
-
-            //auto go lijevo
-
-        }
-        binding.rightBtn.setOnClickListener {
-
-            //auto go desno
-
+        finish()
+    }
+    private class ConnectToDevice(c:Context): AsyncTask<Void, Void, String>(){
+        private var connectSuccess: Boolean = true
+        private val context: Context
+        init {
+            this.context = c
         }
 
 
+        override fun onPreExecute() {
+            super.onPreExecute()
+            m_progress = ProgressDialog.show(context,"Connecting...","plase wait")
+        }
 
+        override fun doInBackground(vararg params: Void?): String? {
+            try {
+                if(m_bluetoothSocket == null || !m_isConnected){
+                    m_bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+                    val device:BluetoothDevice = m_bluetoothAdapter.getRemoteDevice(m_address)
 
+                    if (ActivityCompat.checkSelfPermission(context, Manifest.permission.BLUETOOTH_CONNECT) != PackageManager.PERMISSION_GRANTED) { return "" }
 
+                    m_bluetoothSocket = device.createInsecureRfcommSocketToServiceRecord(m_myUUID)
+                    BluetoothAdapter.getDefaultAdapter().cancelDiscovery()
+                    m_bluetoothSocket!!.connect()
+                }
+            }catch (e: IOException){
+                connectSuccess = false
+                e.printStackTrace()
+            }
+            return null
+        }
 
+        override fun onPostExecute(result: String?) {
+            super.onPostExecute(result)
+            if(!connectSuccess){
+                Log.i("data","couldn't connect")
+            }else{
+                m_isConnected = true
+            }
+            m_progress.dismiss()
+        }
     }
 }
